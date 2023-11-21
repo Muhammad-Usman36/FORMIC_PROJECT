@@ -11,7 +11,7 @@ import { View,TextInput,Button,Text, Alert } from 'react-native';
       }
     });
   return (
-    <View onSubmit={formik.handleSubmit()}>
+    <View onSubmit={formik.handleSubmit}>
       <Text htmlFor="email">Email Address</Text> 
       <TextInput
       placeholder='hell'
