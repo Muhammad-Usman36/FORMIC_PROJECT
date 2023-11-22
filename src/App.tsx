@@ -1,30 +1,60 @@
 import React from 'react';
-import { useFormik } from 'formik';
-import { View,TextInput,Button,Text, Alert } from 'react-native';
+import { View, TextInput, Button, Text } from 'react-native';
+import { Formik } from 'formik';
+import * as yup from 'yup';
 
+const validationSchema = yup.object().shape({
+  name: yup.string(),
+  email: yup.string().email('Enter a valid email')  ,
+  age: yup.number().typeError('Age must be a number'),
+});
 
-  const SignupForm = () => {
-    const formik = useFormik({
-      initialValues: { email: "email" },
-      onSubmit: values => {
-        alert(JSON.stringify(values, null, 2));
-      }
-    });
+const DataEntryForm = () => {
+  const handleSubmit = (values) => {
+    console.log(values);
+    // Handle form submission logic here
+  };
+
   return (
-    <View onSubmit={formik.handleSubmit}>
-      <Text htmlFor="email">Email Address</Text> 
-      <TextInput
-      placeholder='hell'
-        id="email"
-        name="email"
-        type="email"
-        onChange={formik.handleChange('email')}
-        value={formik.values.email}
-      />
-<Button title='submit' type="submit" onPress={()=>Alert.alert('chaaa')}/>
-      
+    <View>
+      <Formik
+        initialValues={{ name: '', email: '', age: '' }}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+      >
+        {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+          <View>
+            <TextInput
+              onChangeText={handleChange('name')}
+              onBlur={handleBlur('name')}
+              value={values.name}
+              placeholder="Name"
+            />
+            {errors.name && <Text style={{ color: 'red' }}>{errors.name}</Text>}
+
+            <TextInput
+              onChangeText={handleChange('email')}
+              onBlur={handleBlur('email')}
+              value={values.email}
+              placeholder="Email"
+            />
+            {errors.email && <Text style={{ color: 'red' }}>{errors.email}</Text>}
+
+            <TextInput
+              onChangeText={handleChange('age')}
+              onBlur={handleBlur('age')}
+              value={values.age}
+              placeholder="Age"
+              keyboardType="numeric"
+            />
+            {errors.age && <Text style={{ color: 'red' }}>{errors.age}</Text>}
+
+            <Button onPress={handleSubmit} title="Submit" />
+          </View>
+        )}
+      </Formik>
     </View>
   );
 };
 
-export default SignupForm;
+export default DataEntryForm;
