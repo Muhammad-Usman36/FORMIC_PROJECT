@@ -4,8 +4,8 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 
 const validationSchema = yup.object().shape({
-  fname: yup.string().required('First _ Name is required'),
-  lname: yup.string().required('Last _ Name is required'),
+  fname: yup.string(),
+  lname: yup.string(),
   email: yup.string().email('Enter a valid email'),
   Pnumber: yup.number().typeError('Phone number must be a number'),
   adress: yup.string().required('Adress must be 10 characters'),
@@ -63,11 +63,11 @@ const App = () => {
               onChangeText={handleChange('adress')}
               onBlur={handleBlur('adress')}
               value={values.adress}
-              placeholder="adress"
+              placeholder="Enter - address"
               placeholderTextColor={"black"}
             />
             {errors.adress && <Text style={{ color: 'red' }}>{errors.adress}</Text>}
-            <Text style={{color: 'black',marginLeft: 10}}>Adress      </Text>
+            <Text style={{color: 'black',marginLeft: 10}}>Address      </Text>
 
 
             <TextInput
@@ -75,7 +75,7 @@ const App = () => {
               onChangeText={handleChange('email')}
               onBlur={handleBlur('email')}
               value={values.email}
-              placeholder="Email"
+              placeholder="Email _ address"
               placeholderTextColor={"black"}
             />
             {errors.email && <Text style={{ color: 'red' }}>{errors.email}</Text>}
@@ -117,7 +117,7 @@ const App = () => {
             {errors.Pcode && <Text style={{ color: 'red' }}>{errors.Pcode}</Text>}
             <Text style={{color: 'black',marginLeft: 10}}>Postal_code</Text>
             <View style={{marginLeft: 50,marginTop:40}}>
-<Button title="Sign_up"onPress={() => Alert.alert('wait for the logic')}/>
+            <Button onPress={handleSubmit }   title="Submit" />
 </View>
           </View>
         )}
@@ -144,6 +144,9 @@ const styles = StyleSheet.create({
     borderColor: 'grey',
     padding: 5,
     marginBottom: 20,
+    flexWrap: 'wrap',
+    flexDirection: 'column',
+    color: 'black',
   },
 });
 
