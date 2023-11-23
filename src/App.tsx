@@ -14,12 +14,21 @@ const validationSchema = yup.object().shape({
 
 
 
+ // name: string().required(),
+ // age: number().required().positive().integer(),
+ // email: string().email(),
+ // website: string().url().nullable(),
+ // createdOn: date().default(() => new Date()),
+ //web link
+ //https://github.com/jquense/yup
+
+
 });
 
 const App = () => {
   const handleSubmit = (values) => {
     console.log(values);
-    // Handle form submission logic here
+  Alert.alert('data submit');
   };
 
   return (
