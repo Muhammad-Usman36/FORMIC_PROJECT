@@ -7,8 +7,11 @@ const validationSchema = yup.object().shape({
   fname: yup.string().required('First _ Name is required'),
   lname: yup.string().required('Last _ Name is required'),
   email: yup.string().email('Enter a valid email'),
-  age: yup.number().typeError('Age must be a number'),
+  Pnumber: yup.number().typeError('Phone number must be a number'),
   adress: yup.string().required('Adress must be 10 characters'),
+  Pcode: yup.number().typeError('Postal code must be of 5 number'),
+  Rnumber:yup.number().typeError('Refral number must be of 8 number'), 
+
 
 
 });
@@ -22,7 +25,7 @@ const DataEntryForm = () => {
   return (
     <View>
       <Formik
-        initialValues={{adress: '', fname: '',lname: '', email: '', age: '' }}
+        initialValues={{adress: '',Rnumber: '',Pcode: '', fname: '',lname: '', email: '', Pnumber: '' }}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
@@ -62,12 +65,28 @@ const DataEntryForm = () => {
             {errors.email && <Text style={{ color: 'red' }}>{errors.email}</Text>}
 
             <TextInput
-              onChangeText={handleChange('age')}
-              onBlur={handleBlur('age')}
-              value={values.age}
-              placeholder="Age"
+              onChangeText={handleChange('Pnumber')}
+              onBlur={handleBlur('Pnumber')}
+              value={values.Pnumber}
+              placeholder="Phone _ number"
             />
-            {errors.age && <Text style={{ color: 'red' }}>{errors.age}</Text>}
+            {errors.Pnumber && <Text style={{ color: 'red' }}>{errors.Pnumber}</Text>}
+
+            <TextInput
+              onChangeText={handleChange('Rnumber')}
+              onBlur={handleBlur('Rnumber')}
+              value={values.Rnumber}
+              placeholder="Refral _ number"
+            />
+            {errors.Rnumber && <Text style={{ color: 'red' }}>{errors.Rnumber}</Text>}
+
+            <TextInput
+              onChangeText={handleChange('Pcode')}
+              onBlur={handleBlur('Pcode')}
+              value={values.Pcode}
+              placeholder="Postal _ code"
+            />
+            {errors.Pcode && <Text style={{ color: 'red' }}>{errors.Pcode}</Text>}
 
             <Button onPress={handleSubmit} title="Submit" />
           </View>
